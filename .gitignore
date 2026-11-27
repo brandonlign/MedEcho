@@ -10,3 +10,7 @@ dist/
 .DS_Store
 data/private/
 recordings/
+*.egg-info/
+var/
+.hypothesis/
+build/

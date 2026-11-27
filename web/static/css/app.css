@@ -1,0 +1,43 @@
+:root {
+  --bg: #f7f3ec;
+  --surface: #fffdf8;
+  --text: #1c1a17;
+  --muted: #5a554c;
+  --line: #d9d2c4;
+  --accent: #1f5f5b;
+  --accent-text: #ffffff;
+  --caution: #8a5a00;
+  --emergency: #9b2c1f;
+  --font-head: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #171614;
+    --surface: #211f1c;
+    --text: #f2ede3;
+    --muted: #b9b2a4;
+    --line: #3a3732;
+    --accent: #7fc4bd;
+    --accent-text: #10201f;
+    --caution: #e3b455;
+    --emergency: #f08a7b;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.55;
+}
+main, .site-header, .site-footer { max-width: 44rem; margin: 0 auto; padding: 1.25rem; }
+h1, h2, h3 { font-family: var(--font-head); line-height: 1.2; font-weight: 600; }
+h1 { font-size: 2.1rem; margin: 1.5rem 0 1rem; }
+.wordmark { font-family: var(--font-head); font-size: 1.3rem; font-weight: 600; color: var(--text); text-decoration: none; }
+.lede { font-size: 1.2rem; color: var(--muted); }
+.site-footer { border-top: 1px solid var(--line); margin-top: 3rem; }
+.scope-note { color: var(--muted); font-size: 1rem; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
