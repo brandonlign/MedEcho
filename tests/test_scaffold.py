@@ -14,9 +14,18 @@ from medecho.db.session import Database
 
 ROOT = Path(__file__).resolve().parents[1]
 PACKAGES = [
-    "api", "call", "transports", "channels", "sheet", "speech",
-    "grader", "conformal", "redteam", "study", "db",
-]  # fmt: skip
+    "api",
+    "call",
+    "transports",
+    "channels",
+    "sheet",
+    "speech",
+    "grader",
+    "conformal",
+    "redteam",
+    "study",
+    "db",
+]
 
 
 @pytest.mark.parametrize("name", PACKAGES)
@@ -45,13 +54,25 @@ def test_home_page_states_scope(client: TestClient) -> None:
 
 
 def test_defaults_are_free_and_local(monkeypatch: pytest.MonkeyPatch) -> None:
-    for key in ("MEDECHO_STT", "MEDECHO_TTS", "MEDECHO_GRADER", "MEDECHO_TRANSPORT",
-                "MEDECHO_SHEET_VLM", "MEDECHO_OCR", "MEDECHO_DEMO"):  # fmt: skip
+    for key in (
+        "MEDECHO_STT",
+        "MEDECHO_TTS",
+        "MEDECHO_GRADER",
+        "MEDECHO_TRANSPORT",
+        "MEDECHO_SHEET_VLM",
+        "MEDECHO_OCR",
+        "MEDECHO_DEMO",
+    ):
         monkeypatch.delenv(key, raising=False)
     s = load_settings(env_file=None)
     assert (s.stt, s.tts, s.grader, s.transport, s.sheet_vlm, s.ocr) == (
-        "faster-whisper", "edge", "rules", "browser", "none", "tesseract",
-    )  # fmt: skip
+        "faster-whisper",
+        "edge",
+        "rules",
+        "browser",
+        "none",
+        "tesseract",
+    )
     assert s.demo is False
 
 
@@ -75,7 +96,14 @@ def test_database_tables_and_roundtrip(settings: Settings) -> None:
     db = Database(settings.db_url)
     db.create_all()
     tables = set(inspect(db.engine).get_table_names())
-    assert {"sessions", "calls", "item_results", "call_events", "alerts", "schema_version"} <= tables
+    assert {
+        "sessions",
+        "calls",
+        "item_results",
+        "call_events",
+        "alerts",
+        "schema_version",
+    } <= tables
     with db.session() as s:
         sess = models.CareSession(language="fa")
         s.add(sess)
@@ -83,8 +111,17 @@ def test_database_tables_and_roundtrip(settings: Settings) -> None:
         call = models.Call(session_id=sess.id, kind="initial")
         s.add(call)
         s.flush()
-        s.add(models.ItemResult(call_id=call.id, item_id="med-1", phase="immediate",
-                                label="partial", evidence="one pill", score=0.4, understood=False))  # fmt: skip
+        s.add(
+            models.ItemResult(
+                call_id=call.id,
+                item_id="med-1",
+                phase="immediate",
+                label="partial",
+                evidence="one pill",
+                score=0.4,
+                understood=False,
+            )
+        )
         s.commit()
         sid = sess.id
     with db.session() as s:

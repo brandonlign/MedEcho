@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="{{ lang | default('en') }}" dir="{{ 'rtl' if (lang | default('en')) == 'fa' else 'ltr' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}MedEcho{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <header class="site-header">
+    <a class="wordmark" href="/">MedEcho</a>
+  </header>
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer">
+    <p class="scope-note">{% block scope %}MedEcho checks understanding of the sheet as written. It does not review the prescription.{% endblock %}</p>
+  </footer>
+</body>
+</html>
