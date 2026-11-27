@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "medecho"
+version = "0.1.0"
+description = "Family-started phone teach-back for medication instruction sheets"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "sqlalchemy>=2.0",
+    "jinja2>=3.1",
+    "python-multipart>=0.0.9",
+    "python-dotenv>=1.0",
+    "httpx>=0.27",
+    "numpy>=1.26",
+    "pillow>=10.0",
+    "rapidfuzz>=3.6",
+    "pytesseract>=0.3.10",
+    "edge-tts>=6.1",
+    "faster-whisper>=1.0",
+    "pandas>=2.1",
+    "scipy>=1.11",
+    "statsmodels>=0.14",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "hypothesis>=6.98",
+    "ruff>=0.4",
+    "mypy>=1.9",
+    "pre-commit>=3.6",
+    "pandas-stubs",
+]
+
+[tool.setuptools.packages.find]
+include = ["medecho*"]
+
+[tool.setuptools.package-data]
+medecho = ["py.typed"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["RUF001", "RUF002", "RUF003"]  # Persian text uses non-ASCII on purpose
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_ignores = true
+files = ["medecho", "scripts", "tests"]
+
+[[tool.mypy.overrides]]
+module = ["pytesseract.*", "edge_tts.*", "faster_whisper.*", "statsmodels.*", "scipy.*", "av.*", "rapidfuzz.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = [
+    "slow: needs local models or network (deselected by default)",
+]
+addopts = "-m 'not slow' -q"

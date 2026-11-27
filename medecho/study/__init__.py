@@ -1,0 +1,1 @@
+"""MedEcho study package."""

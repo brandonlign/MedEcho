@@ -1,0 +1,42 @@
+Metadata-Version: 2.4
+Name: medecho
+Version: 0.1.0
+Summary: Family-started phone teach-back for medication instruction sheets
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi>=0.110
+Requires-Dist: uvicorn[standard]>=0.29
+Requires-Dist: sqlalchemy>=2.0
+Requires-Dist: jinja2>=3.1
+Requires-Dist: python-multipart>=0.0.9
+Requires-Dist: python-dotenv>=1.0
+Requires-Dist: httpx>=0.27
+Requires-Dist: numpy>=1.26
+Requires-Dist: pillow>=10.0
+Requires-Dist: rapidfuzz>=3.6
+Requires-Dist: pytesseract>=0.3.10
+Requires-Dist: edge-tts>=6.1
+Requires-Dist: faster-whisper>=1.0
+Requires-Dist: pandas>=2.1
+Requires-Dist: scipy>=1.11
+Requires-Dist: statsmodels>=0.14
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.23; extra == "dev"
+Requires-Dist: hypothesis>=6.98; extra == "dev"
+Requires-Dist: ruff>=0.4; extra == "dev"
+Requires-Dist: mypy>=1.9; extra == "dev"
+Requires-Dist: pre-commit>=3.6; extra == "dev"
+Requires-Dist: pandas-stubs; extra == "dev"
+
+# MedEcho
+
+A family member photographs a medication instruction sheet. MedEcho calls the older adult in English or Persian, asks them to explain their medicines in their own words, grades each item with quoted evidence, re-teaches only what was missed using the sheet's exact wording, and checks again 48 hours later. The family receives a summary with audio of anything that did not stick.
+
+MedEcho's voice can only say fixed phrases and verbatim text from the family-confirmed sheet. No language model output ever reaches the speaker.
+
+See [SPEC.md](SPEC.md) for the full design, [AGENTS.md](AGENTS.md) for the rules for contributors, and `docs/` for architecture, safety, study protocol and results.
+
+## Run
+
+See `docs/RUNNING.md` (created during the build).
